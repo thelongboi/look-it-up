@@ -1,0 +1,1 @@
+const String noDefinitionsFound = 'No definitions found for the word ';
