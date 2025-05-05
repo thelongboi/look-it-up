@@ -12,7 +12,7 @@ final class SearchApiInitial extends SearchApiState {}
 final class SearchApiLoading extends SearchApiState {}
 
 final class SearchApiLoaded extends SearchApiState {
-  final List<SearchResult> definitions;
+  final List<DictionaryEntry> definitions;
 
   const SearchApiLoaded({required this.definitions});
 

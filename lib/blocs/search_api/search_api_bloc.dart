@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:look_it_up/constants/constant_string.dart';
-import 'package:look_it_up/models/search_result.dart';
+import 'package:look_it_up/models/dictionary_entry.dart';
 import 'package:look_it_up/repositories/search_repository.dart';
 
 part 'search_api_event.dart';
@@ -18,7 +18,7 @@ class SearchApiBloc extends Bloc<SearchApiEvent, SearchApiState> {
       SearchDefinitionOfWordEvent event, Emitter<SearchApiState> emit) async {
     emit(SearchApiLoading());
     try {
-      final List<SearchResult> definitions =
+      final List<DictionaryEntry> definitions =
           await searchRepository.getDefinitions(event.word);
 
       if (definitions.isEmpty) {

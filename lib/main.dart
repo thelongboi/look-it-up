@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:look_it_up/config/bloc_providers.dart';
-import 'package:look_it_up/config/repo_providers.dart';
+import 'package:look_it_up/blocs/search_api/search_api_bloc.dart';
 import 'package:look_it_up/config/router_config.dart';
+import 'package:look_it_up/repositories/search_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: repoProviders,
+      providers: [
+        RepositoryProvider<SearchRepository>(
+          create: (context) => SearchRepository(),
+        ),
+      ],
       child: MultiBlocProvider(
-        providers: blocProviders,
+        providers: [
+          BlocProvider(
+            create: (context) => SearchApiBloc(
+              searchRepository:
+                  RepositoryProvider.of<SearchRepository>(context),
+            ),
+          )
+        ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: routerConfig,
